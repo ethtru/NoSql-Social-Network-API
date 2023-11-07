@@ -19,7 +19,7 @@ module.exports = {
     try {
       const user = await User
         // .populate("friends")
-        // .populate("thoughts")
+        .populate("thoughts")
         .findOne({ _id: req.params.userId })
         .select("-__v");
 
@@ -76,29 +76,5 @@ module.exports = {
     }
   },
 
-  // Add a thought to a user
-
-  // async addThought(req, res) {
-  //   console.log("You are adding an thought");
-  //   console.log(req.body);
-
-  //   try {
-  //     const user = await User.findOneAndUpdate(
-  //       { _id: req.params.userId },
-  //       { $addToSet: { thoughts: req.body } },
-  //       { runValidators: true, new: true }
-  //     );
-
-  //     if (!user) {
-  //       return res
-  //         .status(404)
-  //         .json({ message: "No user found with that ID :(" });
-  //     }
-
-  //     res.json(user);
-  //   } catch (err) {
-  //     res.status(500).json(err);
-  //   }
-  // },
 
 };
