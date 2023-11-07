@@ -34,7 +34,7 @@ module.exports = {
   async createThought(req, res) {
     try {
       const thought = await Thought.create(req.body);
-      const user = await User.findByIdAndUpdate(
+      const user = await User.findOneAndUpdate(
         { _id: req.body.userId },
         { $addToSet: { thoughts: thought } },
         { runValidators: true, new: true }

@@ -1,9 +1,10 @@
 // const { ObjectId } = require("mongoose").Types;
-const { User, Thought } = require("../models");
+const { User } = require("../models/User");
+const { Thought } = require("../models/Thought");
 
 module.exports = {
   // Get all users
-  async getUsers(req, res) {
+  async getAllUsers(req, res) {
     try {
       const users = await User.find();
 
@@ -77,46 +78,27 @@ module.exports = {
 
   // Add a thought to a user
 
-  async addThought(req, res) {
-    console.log("You are adding an thought");
-    console.log(req.body);
+  // async addThought(req, res) {
+  //   console.log("You are adding an thought");
+  //   console.log(req.body);
 
-    try {
-      const user = await User.findOneAndUpdate(
-        { _id: req.params.userId },
-        { $addToSet: { thoughts: req.body } },
-        { runValidators: true, new: true }
-      );
-
-      if (!user) {
-        return res
-          .status(404)
-          .json({ message: "No user found with that ID :(" });
-      }
-
-      res.json(user);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  },
-  // Remove assignment from a student
-  // async removeAssignment(req, res) {
   //   try {
-  //     const student = await Student.findOneAndUpdate(
-  //       { _id: req.params.studentId },
-  //       { $pull: { assignment: { assignmentId: req.params.assignmentId } } },
+  //     const user = await User.findOneAndUpdate(
+  //       { _id: req.params.userId },
+  //       { $addToSet: { thoughts: req.body } },
   //       { runValidators: true, new: true }
   //     );
 
-  //     if (!student) {
+  //     if (!user) {
   //       return res
   //         .status(404)
-  //         .json({ message: 'No student found with that ID :(' });
+  //         .json({ message: "No user found with that ID :(" });
   //     }
 
-  //     res.json(student);
+  //     res.json(user);
   //   } catch (err) {
   //     res.status(500).json(err);
   //   }
   // },
+
 };
