@@ -1,5 +1,6 @@
 const { User } = require("../models/User");
 const { Thought, Reaction } = require("../models/Thought");
+const { ObjectId } = require("mongoose").Types;
 
 module.exports = {
   // Get all thoughts
@@ -51,10 +52,15 @@ module.exports = {
       const thought = await Thought.findOneAndDelete({
         _id: req.params.thoughtId,
       });
-
       if (!thought) {
         res.status(404).json({ message: "No thought with that ID" });
       }
+      const user = await User.findOneAndUpdate(
+        { _id: thought.userId },
+        { $pull: { thoughts: req.params.thoughtId } },
+        { runValidators: true, new: true }
+      );
+
       res.json({ message: "Thought successfully deleted" });
     } catch (err) {
       console.log(err);

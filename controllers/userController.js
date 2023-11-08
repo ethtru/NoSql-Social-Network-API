@@ -19,7 +19,7 @@ module.exports = {
     try {
       const user = await User
         // .populate("friends")
-        .populate("thoughts")
+        // .populate("thoughts")
         .findOne({ _id: req.params.userId })
         .select("-__v");
 

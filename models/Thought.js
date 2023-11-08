@@ -46,6 +46,10 @@ const thoughtSchema = new Schema(
       type: String,
       default: true,
     },
+    userId: {
+      type: String,
+      default: true,
+    },
     reactions: [reactionSchema],
   },
   {
